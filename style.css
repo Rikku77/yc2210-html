@@ -20,17 +20,19 @@ body h1, h2, h3, p {
 
 header {
     background-color: rgb(28, 28, 72);
-    width: 100vw;
+    /* width: 100vw; */
     padding-top: 25px;
     padding-bottom: 25px;
     margin-bottom: 20px;
+   
+    
 }
 
 .NnG-logo-name {
     gap: 10px;
-    width: 90%;
+    width: 90vw;
     display: grid;
-    grid-template-columns: 1fr auto;
+    justify-content: left;
     }
 
 .NnG-logo-name img{
@@ -46,6 +48,17 @@ h1 {
 
 h2 {
     font-size: 18px;
+    margin-top: 30px;
+}
+
+p {
+    margin-top: 20px;
+}
+
+.popup{
+    display: flex;
+    justify-content: right;
+    
 }
 
 .btn {

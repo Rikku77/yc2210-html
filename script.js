@@ -5,3 +5,7 @@ function fillHeader() {
     
     `;
 }
+
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover();   
+  });

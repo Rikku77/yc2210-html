@@ -14,7 +14,7 @@ main {
 }
 
 
-body h1, h2, h3, p {
+body h1, h2, h3, p, label {
     color: white;
 }
 

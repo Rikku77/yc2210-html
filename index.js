@@ -15,6 +15,6 @@ registerForm.addEventListener("submit", function(e) {
         },
         body: jsonData
     })
-    console.log("submitted")
+    console.log("submitted");
 })
 

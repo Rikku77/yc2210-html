@@ -1,4 +1,4 @@
-const registerForm = document.getElementById("register-form");
+const loginForm = document.getElementById("login-form");
 registerForm.addEventListener("submit", function(e) {
     e.preventDefault();
     let form = e.currentTarget;
@@ -17,4 +17,3 @@ registerForm.addEventListener("submit", function(e) {
     })
     console.log("submitted")
 })
-

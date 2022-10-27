@@ -14,7 +14,7 @@
     <title>Document</title>
 </head>
 <body>
-    <form id="register-form" method="post" action="http://localhost:8080/User">
+    <form id="login-form" method="post" action="http://localhost:8080/User">
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
@@ -24,8 +24,10 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" name="hashedPassword" placeholder="Password">
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">login</button>
+        <div class="text-center">
+            <p>Not a member? <a href="/registration.html">Register</a></p>
+        </div>
     </form>
 </body>
-<script src="registration.js"></script>
 </html>

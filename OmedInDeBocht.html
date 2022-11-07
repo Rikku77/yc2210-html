@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function LetsGo(){
+            fetch("http://localhost:8082/AlleBezorgers")
+            .then(a=>a.json())
+            .then(b=>tabelmaken(b))
+        }
+        function tabelmaken(tabel){
+            for(var x=0; x<tabel.length; x++){
+                document.getElementById("def").innerHTML+=tabel[x].naam
+            }
+
+
+        }
+
+
+    </script>
+</head>
+<body>
+<button onclick="LetsGo()">dit is een knopje</button>
+
+<div id="def"></div>
+
+    
+</body>
+</html>

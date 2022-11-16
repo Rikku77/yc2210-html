@@ -1,16 +1,69 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Bezorgers</title>
     <script>
-        function LetsGo(){
-            fetch("http://localhost:8082/AlleBezorgers")
-            .then(a=>a.json())
-            .then(b=>tabelmaken(b))
+        function toonBezorgers(){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    console.log(this.responseText);
+                    var allBezorgers = JSON.parse(this.responseText);
+                    var eindString = "<table border=2>";
+                    for(var x = 0; x < allBezorgers.length; x++){
+                        eindString += "<tr><td>"+allBezorgers[x].naam+"</td>";
+                        eindString += "<td>"+allBezorgers[x].leeftijd+"</td><td><button onclick=verwijderen("+allBezorgers[x].id+")>verwijder</button></td></tr>";
+                        // eindString += "<tr><td>"+allBezorgers[x].beschikbaar+"</td></tr>";
+                    }
+                    eindString += "</table>";
+                    document.getElementById("alleBezorgersTabel").innerHTML = eindString;
+                }
+            }
+            xhr.open("GET","http://localhost:8082/AlleBezorgers", true);
+            xhr.send();
         }
+        function toevoegen(){
+            var debezorger = {};
+            debezorger.naam = document.getElementById("naambezorger").value;
+            debezorger.leeftijd = document.getElementById("leeftijdbezorger").value;
+            debezorger.password = document.getElementById("wachtwoordbezorger").value;
+            debezorger.email = document.getElementById("emailbezorger").value;
+            debezorger.beschikbaar = document.getElementById("beschikbaarbezorger").checked;
+            var deJSON = JSON.stringify(debezorger);
+            var leeftijdbezorger = parseInt(debezorger);
+            var wachtwoordinvoer = JSON.stringify(debezorger);
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    console.log("toevoegen gelukt");
+                    toonBezorgers();
+                }
+            }
+            xhr.open("POST","http://localhost:8082/Bezorger", true);
+            xhr.setRequestHeader("Content-Type","application/json");
+            xhr.send(deJSON); 
+
+        }
+        function verwijderen(deid){
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(this.readyState == 4){
+                    toonBezorgers();
+                    // window.location=window.location;
+                    }
+            }
+            xhr.open("DELETE","http://localhost:8082/verwijderBezorger/"+deid, true);
+            xhr.send();
+		}
+        
+
+
+
+
         function tabelmaken(tabel){
             for(var x=0; x<tabel.length; x++){
                 document.getElementById("def").innerHTML+=tabel[x].naam
@@ -18,14 +71,37 @@
 
 
         }
+        // function Login(){
+        //     console.log("Login here");
+        //     let a=document.getElementById("Username").value;
+        //     let b=document.getElementById("OTP").value;
+        //     console.log(a);
+        //     console.log(b);
+        //     fetch("http://localhost:8082/Gegevens/"+a+"/"+b)
+        //     .then(c=>c.text())
+        // }
+
+
 
 
     </script>
 </head>
 <body>
-<button onclick="LetsGo()">dit is een knopje</button>
+    <h2>Welkom lieve bezorgers van Netflix&Grill!
+        <br> Log in en hou alles bij!</h2>
 
-<div id="def"></div>
+<input type="naam" id="naambezorger">
+<input type="number" id="leeftijdbezorger">
+<input type="password" id="wachtwoordbezorger">
+<input type="email" id="emailbezorger">
+<input type="checkbox" id="beschikbaarbezorger">
+<button onclick="toevoegen()">toevoegen</button>
+<button onclick="toonBezorgers()">Toon alle Bezorgers</button>
+<div id="alleBezorgersTabel"></div>
+
+
+<!-- <button onclick="Login()">Sign in</button> -->
+<!-- <div id="def"></div> -->
 
     
 </body>

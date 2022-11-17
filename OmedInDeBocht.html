@@ -1,32 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bezorgers</title>
+    <!-- Latest compiled and minified CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function LetsGo(){
-            fetch("http://localhost:8082/AlleBezorgers")
-            .then(a=>a.json())
-            .then(b=>tabelmaken(b))
-        }
-        function tabelmaken(tabel){
-            for(var x=0; x<tabel.length; x++){
-                document.getElementById("def").innerHTML+=tabel[x].naam
+      function toonBezorgers() {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4) {
+            console.log(this.responseText);
+            var allBezorgers = JSON.parse(this.responseText);
+            var eindString = "<table  border=4>";
+            for (var x = 0; x < allBezorgers.length; x++) {
+              eindString += "<tr><td><b>" + allBezorgers[x].naam + "</b></td>";
+              eindString +=
+                "<td>" +
+                allBezorgers[x].leeftijd +
+                "</td><td><button class='btn btn-danger' onclick=verwijderen(" +
+                allBezorgers[x].id +
+                ")>verwijder</button></td></tr>";
+              // eindString += "<tr><td>"+allBezorgers[x].beschikbaar+"</td></tr>";
             }
+            eindString += "</table>";
+            document.getElementById("alleBezorgersTabel").innerHTML =
+              eindString;
+          }
+        };
+        xhr.open("GET", "http://localhost:8082/AlleBezorgers", true);
+        xhr.send();
+      }
+      function toevoegen() {
+        var debezorger = {};
+        debezorger.naam = document.getElementById("naambezorger").value;
+        debezorger.leeftijd = document.getElementById("leeftijdbezorger").value;
+        debezorger.password =
+          document.getElementById("wachtwoordbezorger").value;
+        debezorger.email = document.getElementById("emailbezorger").value;
+        debezorger.beschikbaar = document.getElementById(
+          "beschikbaarbezorger"
+        ).checked;
+        var deJSON = JSON.stringify(debezorger);
+        var leeftijdbezorger = parseInt(debezorger);
+        var wachtwoordinvoer = JSON.stringify(debezorger);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4) {
+            console.log("toevoegen gelukt");
+            toonBezorgers();
+          }
+        };
+        xhr.open("POST", "http://localhost:8082/Bezorger", true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(deJSON);
+      }
+      function verwijderen(deid) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+          if (this.readyState == 4) {
+            toonBezorgers();
+            // window.location=window.location;
+          }
+        };
+        xhr.open(
+          "DELETE",
+          "http://localhost:8082/verwijderBezorger/" + deid,
+          true
+        );
+        xhr.send();
+      }
 
-
+      function tabelmaken(tabel) {
+        for (var x = 0; x < tabel.length; x++) {
+          document.getElementById("def").innerHTML += tabel[x].naam;
         }
-
-
+      }
+      // function Login(){
+      //     console.log("Login here");
+      //     let a=document.getElementById("Username").value;
+      //     let b=document.getElementById("OTP").value;
+      //     console.log(a);
+      //     console.log(b);
+      //     fetch("http://localhost:8082/Gegevens/"+a+"/"+b)
+      //     .then(c=>c.text())
+      // }
     </script>
-</head>
-<body>
-<button onclick="LetsGo()">dit is een knopje</button>
+  </head>
+  <body class="text-bg-primary">
+    <h2>
+      Welkom lieve bezorgers van Netflix&Grill! <br />
+      Log in en hou alles bij!
+    </h2>
 
-<div id="def"></div>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-6">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-12 col-md-6">Naam</div>
+              <div class="col-12 col-md-6">
+                <input
+                  class="form-control text-bg-dark"
+                  type="naam"
+                  id="naambezorger"
+                />
+              </div>
+            </div>
 
-    
-</body>
+            <div class="row">
+              <div class="col-12 col-md-6">Leeftijd</div>
+              <div class="col-12 col-md-6">
+                <input
+                  class="form-control text-bg-dark"
+                  type="number"
+                  id="leeftijdbezorger"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6">Wachtwoord</div>
+              <div class="col-12 col-md-6">
+                <input
+                  class="form-control text-bg-dark"
+                  type="password"
+                  id="wachtwoordbezorger"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6">Email</div>
+              <div class="col-12 col-md-6">
+                <input
+                  class="form-control text-bg-dark"
+                  type="email"
+                  id="emailbezorger"
+                />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-md-6">Beschikbaarheid</div>
+              <div class="col-12 col-md-6">
+                <input
+                  class="text-bg-light"
+                  type="checkbox"
+                  id="beschikbaarbezorger"
+                />
+              </div>
+            </div>
+
+            <br />
+
+            <button onclick="toevoegen()" class="btn btn-success">
+              toevoegen
+            </button>
+            <button onclick="toonBezorgers()" class="btn btn-danger">
+              Toon alle Bezorgers
+            </button>
+          </div>
+          <div class="row">
+            <div class="col-12 col-md-6">
+              <table
+                id="alleBezorgersTabel"
+                class="table table table-light table-striped table-hover"
+              ></table>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <img
+            class="img-fluid"
+            src="./img_bezorger/pexels-norma-mortenson-4393667.jpg"
+          />
+        </div>
+      </div>
+    </div>
+
+    <!-- <button onclick="Login()">Sign in</button> -->
+    <!-- <div id="def"></div> -->
+  </body>
 </html>

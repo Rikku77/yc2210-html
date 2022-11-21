@@ -8,3 +8,36 @@
     margin: 50px;
 }
 
+div {
+    color: aliceblue;
+}
+
+.film {
+    color:blueviolet;
+    background-color: chartreuse;
+    max-width: 30%;
+    display: inline-block;
+
+}
+
+#result {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    
+}
+.poster{
+    height: 50%;
+    object-fit: contain;
+    width: relative;
+
+}
+.filmtitel{
+    background-color: black;
+
+}
+
+.filmplot{
+
+}
+

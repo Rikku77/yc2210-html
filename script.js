@@ -1,6 +1,6 @@
 function fillHeader() {
     document.getElementById("headerN").innerHTML = `
-    <img src="#" alt="" width="39px" height="39">
+    <img src="../../images/nglogo.png" alt="" width="39px" height="39">
         <h1>Netflix & Grill</h1>
         <br>
         <a href="../question/Questions.html">questions</a>

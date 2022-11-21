@@ -19,7 +19,7 @@ fetch("https://yc2210netflixjavabackend.azurewebsites.net/Question")
         for (i=0; i<b.length; i++) {
             
             document.getElementById("vraag").innerHTML += b[i].text + "<br>";
-          ;
+        
             
             for(j=0; j<b[i].qanswers.length; j++) {
                 

@@ -13,6 +13,22 @@ function filmdata(data) {
     }
 }
 
+function Result2(){fetch("https://yc2210-pythonflaskapp.azurewebsites.net/drie_recepten/", 
+{method:"POST",headers: {
+    'Content-type': 'application/json'},body:'{}'
+}).then(a => a.json())
+.then(b => receptdata(b))}
+
+function receptdata(data) {
+    mijnData = document.getElementById("recept");
+    for (var i = 0; i < data.length; i++) {
+        var div = document.createElement("div");
+        div.className = "recepten"
+        div.innerHTML = '<img class="img" src="'+data[i].img+'">' + '<h2 class="titel_x">' + data[i].titel_x + '</h2>' + '<p class="bereiding">' + data[i].bereidings_stappen + '</p>';
+        mijnData.appendChild(div);
+    }
+}
+function start_load() {Result();Result2()}
 
 //var test1 = Result()
 //var titel1 = test1[0]["title"]

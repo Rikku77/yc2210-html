@@ -41,3 +41,15 @@ div {
 
 }
 
+.recepten{
+    color:blueviolet;
+    background-color: rgb(255, 0, 0);
+    max-width: 30%;
+    display: inline-block;    
+}
+
+#recept {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;    
+}

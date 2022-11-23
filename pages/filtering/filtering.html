@@ -19,12 +19,26 @@
         
     </div>
 </header>
-    <main>
+
+    <main >
         
           <div id="popup-id">
             <h2>Add more filters?</h2>
             <p>Do you want us to take more things into account?</p>
         </div>
+
+        
+           
+            <select onchange = "abc()" id = "ExlMovies">
+              <option class="dropdown-item"  >Select</option>
+              <option class="dropdown-item"  value="0" >Action & Adventure</option>
+              <option class="dropdown-item"  value="1" >Animation & Anime</option>
+              <option class="dropdown-item"  value="2" >Biography & History</option>
+              <option class="dropdown-item"  value="3" >Classic & Cult</option>
+              <option class="dropdown-item"  value="4" >Comedy</option>
+              <option class="dropdown-item"  value="5" >Crime</option>
+            </select>
+          
 
         <div>
             <h2>Movie filters</h2>
@@ -48,7 +62,10 @@
             <button type="button" class="btn btn-danger">#</button>
             <button type="button" class="btn btn-danger">#</button>
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum beatae voluptate minus maiores harum reiciendis impedit mollitia, quibusdam esse sint est libero sit et aut labore! Iste perferendis saepe distinctio.</p>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium, perferendis aliquam! Consequatur amet magnam quas voluptates asperiores nesciunt. Perspiciatis, deleniti! Aspernatur vel consequuntur culpa soluta veritatis error repellat tempore laboriosam.</p>
+        <div id="result">
+            <p id="Titel"></p>
+            <p>films moet hier zijn</p>
+        </div>
         
         </div>
 
@@ -56,9 +73,13 @@
             <a href="#" data-toggle="popover" title="Filters" data-content=OPEN MODAL IN BOOTSTRAP (FUNCTIONS MAKEN)><h2>Filters</h2></a>
 
         </div>
-
+        <button onclick = "Result()" type="button" class="btn btn-danger">Results</button>
+        <div id="result">
+            
+            
+        </div>
     </main>
-    <footer id="footerN">
+    <footer id="footerN" >
         
     </footer>
 </body>
